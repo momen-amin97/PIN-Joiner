@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>PIN-Joiner</Name>
+		<Assembly>C:\ProgramData\PIN-Joiner\SourceFile\PIN-Joiner.dll</Assembly>
+		<AddInId>F34BF685-8078-4624-BCD7-531AEDE0A6BA</AddInId>
+		<FullClassName>PIN_Joiner.Apps</FullClassName>
+		<Text>PIN_Joiner</Text>
+		<VendorId>Team</VendorId>
+		<VendorDescription>Pinnacle</VendorDescription>
+	</AddIn>
+</RevitAddIns>
+
+

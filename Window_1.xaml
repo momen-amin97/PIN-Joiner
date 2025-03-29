@@ -1,0 +1,205 @@
+﻿<Window x:Class="PIN_Joiner.Window_1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PIN_Joiner"
+             mc:Ignorable="d" 
+             MinHeight="770" 
+             MaxHeight="770"
+             MinWidth="345"
+             Icon="Resources\P-Joints.ico"
+             Title="P-Joiner"
+             SizeToContent="Width">
+
+    <Window.Resources>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Gray" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="4" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <Path x:Name="PathIcon" Width="15" Height="25" Stretch="Fill" Fill="#4C87B3" HorizontalAlignment="Left" Margin="17,0,0,0" Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z "/>
+                                <ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E59400" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter TargetName="PathIcon" Property="Fill" Value="Black" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="Green" />
+                                <Setter Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--<Style TargetType="Button">
+            <Setter Property="Width" Value="90"/>
+            <Setter Property="Background" Value="LightGray" />
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+        </Style>-->
+    </Window.Resources>
+
+
+    <Border Padding="10" >
+        <StackPanel>
+            <Image Source="Resources\pinnacle-logo.png" Height="99" Width="222"/>
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="580"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid  Grid.Row="0" VerticalAlignment="Top"  Height="700" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="270"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="0"  Grid.Row="0">
+                        <TextBlock Text="Categories :" FontWeight="DemiBold" />
+                        <ListView SelectionChanged="Selection_Changed_Event" FontSize="15" FontWeight="SemiBold" FontFamily="Calibri"  Name="FirstElements" Margin="5">
+                            
+                        </ListView>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="0" Grid.Row="1">
+                        <TextBlock Text="Categories :" FontWeight="DemiBold" />
+                        <ListView   FontSize="15" FontWeight="SemiBold" Name="SecondElements" Margin="5" />
+                    </StackPanel>
+                    <Button Grid.Column="1"   Grid.Row="0" Height="250" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Advanced" Margin="5,21,-5,0" >
+                        <Button.Content>
+                            <TextBlock Text="Advanced Selection">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="-90"/>
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+
+                <Expander Expanded="Expander_Expanded" ExpandDirection="Right" Name="Expander" VerticalAlignment="Top" Margin="290,10,0,0">
+                    <!--<Expander.Header>
+                    <TextBlock Text="Advanced Selection">
+                        <TextBlock.LayoutTransform>
+                            <RotateTransform Angle="-90"/>
+                        </TextBlock.LayoutTransform>
+                    </TextBlock>
+                </Expander.Header>-->
+                    <Expander.Content>
+                        <Border Background="Beige">
+
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MinWidth="100" Width="Auto"/>
+                                    <ColumnDefinition MinWidth="100" Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Levels:"  Grid.Column="0" Grid.Row="0"/>
+                                <ListView Grid.Row="1" Margin="2"   Grid.Column="0"  Name="Levels">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <CheckBox x:Name="checkBox"   IsChecked="{Binding Path=IsChecked,Mode=TwoWay}"/>
+                                                <TextBlock Text="{Binding Name }"/>
+                                            </StackPanel>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" Value="True">
+                                                    <Setter Property="IsChecked" TargetName="checkBox" Value="True" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+
+                                <TextBlock Text="Types:" Grid.Column="1" Grid.Row="0"/>
+                                <ListView Grid.Row="1" Grid.Column="1" Margin="2" x:Name="Types">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <CheckBox x:Name="TypesCheckbox" IsChecked="{Binding Path=TypesIsChecked, Mode=TwoWay}"/>
+                                                <TextBlock Text="{Binding TypesName}"/>
+                                            </StackPanel>
+                                            <DataTemplate.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}" Value="True">
+                                                    <Setter Property="IsChecked" TargetName="TypesCheckbox" Value="True" />
+                                                </DataTrigger>
+                                            </DataTemplate.Triggers>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Grid>
+                        </Border>
+                    </Expander.Content>
+                </Expander>
+
+                <Grid Grid.Row="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Button Grid.Column="0"  Grid.Row="5" MinWidth="90"  Height="20"  Click="Join_Click" Margin="0,0,10,0" >
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Margin="0,2,5,0"  Text="Join Elements"/>
+                                <Image Source="Resources\Join.png"/>
+                            </StackPanel>
+                        </Button.Content>
+                        <!--<Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="join"  Source="Resources\Join.png" Width="40"  Height="40" />-->
+                    </Button>
+
+                    <Button Grid.Column="1" MinWidth="90"  Grid.Row="5"  Click="UnJoin_Click"  Margin="5"  Height="20"  >
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Margin="0,2,5,0"  Text="UnJoin Elems"/>
+                                <Image Source="Resources\UnJoin.png"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <Button Grid.Column="2" Grid.Row="5"  MinWidth="90" Margin="10,0,0,0" Click="Switch_Click" Height="20" >
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Margin="0,2,5,0"  Text="Switch Join"/>
+                                <Image Source="Resources\switch.png"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+
+
+
+                </Grid>
+
+            </Grid>
+        </StackPanel>
+    </Border>
+
+</Window>
