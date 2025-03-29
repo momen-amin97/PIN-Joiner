@@ -34,6 +34,10 @@ namespace PIN_Joiner
             CloseBtn.IsEnabled = true;
             SaveBtn.IsEnabled = true;
 
+
+
+
+
         }
 
         
